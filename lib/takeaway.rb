@@ -1,7 +1,10 @@
 require 'twilio-ruby'
 require 'time'
+require 'twilio_client'
 
 class Takeaway
+
+include TwilioClient
 
   def initialize(order)
   	@order = order
@@ -18,19 +21,26 @@ class Takeaway
   	result
   end
   
-  def confirm(total)
-  	raise "Totals don't match" if total != @order.total 
-    self
+  def matches?(total)
+    total == @order.total
   end
-  
+
   def calculate_delivery_time
   	t = Time.now+60*60
   	t.strftime("%H:%M")
   end
   
-  def prepare_message
-    @time = self.calculate_delivery_time
-  	"Thank you! Your order was placed and will be delivered before #{@time}."
+  def confirm_order(total, customer_number)  
+    if matches?(total)
+      send_sms(customer_number, prepare_message)
+    else
+      raise "Totals don't match"
+    end
   end
+
+  def prepare_message(delivery_time=calculate_delivery_time)
+    "Thank you! Your order was placed and will be delivered before #{delivery_time}."
+  end   
+
 
 end
