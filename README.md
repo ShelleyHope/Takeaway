@@ -1,4 +1,4 @@
-![sms](https://github.com/ShelleyHope/Takeaway/blob/master/images/joyous_text.PNG)
+![sms](https://github.com/ShelleyHope/Takeaway/blob/master/images/joyous_text.PNG?raw=true)
 
 Makers Week 4 'Test' Project - task as follows:
 
