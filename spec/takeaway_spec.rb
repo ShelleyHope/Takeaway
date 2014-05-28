@@ -3,7 +3,7 @@ require 'takeaway'
 describe 'Takeaway' do
 
 
-let(:dish)                { double :dish, attributes: {name: "Curry", price: 6.00}}
+let(:dish)                { double :dish, name: "Curry", price: 6.00 }
 let(:order)               { double :order, list_dishes: [dish, dish], total: 12.00}
 let(:takeaway_with_order) { Takeaway.new (order) }
 
@@ -28,7 +28,11 @@ let(:takeaway_with_order) { Takeaway.new (order) }
   end
 
   it "confirms the order via SMS when the totals match" do
-  	expect(takeaway_with_order.confirm_order(12, "+447909542641")).to be_true
+    Time.stub(:now => Time.utc(2014, 05, 9, 11, 39, 07))
+
+    expect(takeaway_with_order).to receive(:send_sms).with("+447909542641", "Thank you! Your order was placed and will be delivered before 12:39.")
+  	
+    takeaway_with_order.confirm_order(12, "+447909542641")
   end
   
 end

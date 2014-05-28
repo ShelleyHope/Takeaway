@@ -2,7 +2,7 @@ require "order"
 
 describe "Order" do
 
-  let(:dish) { double :dish, :attributes => {:price => 3} }
+  let(:dish) { double :dish, :price => 3 }
 	let(:order) { Order.new([dish]) }
 
   

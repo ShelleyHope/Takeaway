@@ -27,7 +27,7 @@ class Order
 
   def total
     @dishes.inject(0) do |acc, dish|
-      acc + dish.attributes[:price]
+      acc + dish.price
     end
   end
 

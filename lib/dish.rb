@@ -1,9 +1,11 @@
 class	Dish
 
-	attr_accessor :attributes
+	attr_accessor :name
+	attr_accessor :price
 	
-	def initialize(attributes={:name =>"", :price => 0})
-		@attributes = attributes
+	def initialize(name, price = 0)
+		@name = name
+		@price = price
 	end
 	
 end
